@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Campus Task Manager</h1>
+        <p>Smart Academic Workload Management</p>
+    </header>
+
+
+    <main>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+
+            <div class="card">
+                <h3>Total Tasks</h3>
+                <p id="totalTasks">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending</h3>
+                <p id="pendingTasks">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Completed</h3>
+                <p id="completedTasks">0</p>
+            </div>
+
+            <div class="card">
+                <h3>High Risk</h3>
+                <p id="highRiskTasks">0</p>
+            </div>
+
+        </section>
+
+
+        <!-- Workload Analytics -->
+        <section class="analytics-section">
+
+            <div class="analytics-header">
+                <div>
+                    <p class="recommendation-label">WORKLOAD ANALYTICS</p>
+                    <h2>Workload Overview</h2>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+
+                <div class="analytics-card">
+                    <span>Total Estimated Hours</span>
+                    <strong id="totalHours">0</strong>
+                    <small>hours</small>
+                </div>
+
+                <div class="analytics-card">
+                    <span>Pending Workload</span>
+                    <strong id="pendingHours">0</strong>
+                    <small>hours</small>
+                </div>
+
+                <div class="analytics-card">
+                    <span>Completed Workload</span>
+                    <strong id="completedHours">0</strong>
+                    <small>hours</small>
+                </div>
+
+                <div class="analytics-card">
+                    <span>Completion Rate</span>
+                    <strong id="completionRate">0</strong>
+                    <small>%</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Recommended Task -->
+        <section class="recommendation-section">
+
+            <div class="recommendation-header">
+                <div>
+                    <p class="recommendation-label">SMART RECOMMENDATION</p>
+                    <h2>Recommended Next Task</h2>
+                </div>
+
+                <span id="recommendationRisk" class="badge">
+                    Loading...
+                </span>
+            </div>
+
+            <div id="recommendedTask">
+                <p class="recommendation-loading">
+                    Finding the task that needs your attention...
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Add Task -->
+        <section class="task-form-section">
+
+            <h2>Add New Task</h2>
+
+            <form id="taskForm">
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Task Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="e.g. DBMS Assignment"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        placeholder="e.g. Database Management Systems"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        placeholder="Briefly describe what needs to be completed..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="deadline">
+                        Deadline
+                    </label>
+
+                    <input
+                        type="date"
+                        id="deadline"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="priority">
+                        Priority
+                    </label>
+
+                    <select id="priority">
+
+                        <option value="LOW">
+                            Low
+                        </option>
+
+                        <option value="MEDIUM" selected>
+                            Medium
+                        </option>
+
+                        <option value="HIGH">
+                            High
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="estimatedHours">
+                        Estimated Hours
+                    </label>
+
+                    <input
+                        type="number"
+                        id="estimatedHours"
+                        min="0.5"
+                        step="0.5"
+                        placeholder="e.g. 5"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit">
+                    Add Task
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Tasks -->
+        <section class="tasks-section">
+
+            <h2>My Tasks</h2>
+
+            <div class="task-controls">
+
+            <input
+                type="text"
+                id="searchTasks"
+                placeholder="Search tasks..."
+            >
+
+            <select id="filterSubject">
+                <option value="ALL">All Subjects</option>
+            </select>
+
+            <select id="filterPriority">
+                <option value="ALL">All Priorities</option>
+                <option value="HIGH">High</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="LOW">Low</option>
+            </select>
+
+            <select id="filterStatus">
+                <option value="ALL">All Status</option>
+                <option value="TODO">To Do</option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="COMPLETED">Completed</option>
+            </select>
+
+            <select id="sortTasks">
+                <option value="DEFAULT">Sort: Default</option>
+                <option value="DEADLINE">Deadline</option>
+                <option value="RISK">Risk Score</option>
+                <option value="PRIORITY">Priority</option>
+            </select>
+
+        </div>
+
+
+        <div id="taskList">
+
+                <p>
+                    Loading tasks...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="filters.js"></script>
+
+</body>
+
+</html>
