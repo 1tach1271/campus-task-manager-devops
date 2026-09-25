@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: campus-task-manager
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: campus-task-manager
+  template:
+    metadata:
+      labels:
+        app: campus-task-manager
+    spec:
+      containers:
+        - name: campus-task-manager
+          image: 663047477020.dkr.ecr.us-east-1.amazonaws.com/campus-task-manager:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_USERNAME
+              value: "campus_app"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password

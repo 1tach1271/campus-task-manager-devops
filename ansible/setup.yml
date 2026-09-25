@@ -1,0 +1,41 @@
+---
+- name: Configure Campus Task Manager EC2
+  hosts: webserver
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Check Java installation
+      ansible.builtin.command: java -version
+      register: java_version
+      changed_when: false
+
+    - name: Check Git installation
+      ansible.builtin.command: git --version
+      register: git_version
+      changed_when: false
+
+    - name: Check Maven installation
+      ansible.builtin.command: mvn -version
+      register: maven_version
+      changed_when: false
+
+    - name: Check Docker installation
+      ansible.builtin.command: docker --version
+      register: docker_version
+      changed_when: false
+
+    - name: Check Jenkins service
+      ansible.builtin.systemd:
+        name: jenkins
+      register: jenkins_status
+      changed_when: false
+
+    - name: Display environment verification
+      ansible.builtin.debug:
+        msg:
+          - "Java: {{ java_version.stderr }}"
+          - "Git: {{ git_version.stdout }}"
+          - "Maven: {{ maven_version.stdout }}"
+          - "Docker: {{ docker_version.stdout }}"
+          - "Jenkins state: {{ jenkins_status.status.ActiveState }}"
