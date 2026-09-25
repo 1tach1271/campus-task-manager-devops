@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:8081/api/tasks";
-
+const API_URL = "http://a46f5ac3edf784fb79c0e2497a55ec96-2030591016.us-east-1.elb.amazonaws.com:8081/api/tasks";
 const taskForm = document.getElementById("taskForm");
 const taskList = document.getElementById("taskList");
 
